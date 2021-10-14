@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../../common/js/calc_common.js"></script>
+    <script src="./js/singleton.js"></script>
+    <script>
+        let singleton = CALC.singleton;
+
+        let calculatorSingleton = singleton.OperationSingleton.getInstance();
+
+        let firsNumber = 100;
+        let secondNumber = 20;
+
+        calculatorSingleton.operate(singleton.OperationSingleton.ADD_OPERATION, firsNumber, secondNumber);)
+        calculatorSingleton.operate(singleton.OperationSingleton.SUBSTRACT_OPERATION, firsNumber, secondNumber);)
+        calculatorSingleton.operate(singleton.OperationSingleton.MULTIPLY_OPERATION, firsNumber, secondNumber);)
+        calculatorSingleton.operate(singleton.OperationSingleton.DIVIDE_OPERATION, firsNumber, secondNumber);)
+    </script>
+    
+</body>
+</html>
