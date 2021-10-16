@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../../common/js/calc_common.js"></script>
+    <script src="../js/abstract_operation_product.js"></script>
+    <script src="../js/abstract_number_operand_product.js"></script>
+    <script src="../js/double_number_operand_product.js"></script>
+    <script src="../js/double_operation_product.js"></script>
+    <script src="../js/integer_number_operand_product.js"></script>
+    <script src="../js/integer_operation_product.js"></script>
+    <script>
+        let firsNumber = 10.3;
+        let secondNumber = 20.2;
+        
+        let operationFactory = new absractfactory.IntegerOperationFactory();
+        let operationProduct = operationFactory.createOperationProduct();
+
+        let firstNumberOperandProduct = operationFactory.createNumberOperandProduct(firstNumber);
+        let secondNumberOperandProduct = operationFactory.createNumberOperandProduct(secondNumber);
+
+        operationProduct.setFirstNumberOperandProduct(firstNumberOperandProduct);
+        operationProduct.setSecondNumberOperandProduct(secondNumberOperandProduct)
+
+        operationProduct.print();
+
+        operationFactory = new abstractfactory.DoubleOperationFactory()
+
+        operationProduct = operationFactory.createOperationProduct();
+
+        firstNumberOperandProduct =  operationFactory.createNumberOperandProduct(firstNumber);
+        secondNumberOperandProduct =  operationFactory.createNumberOperandProduct(secondNumber);
+
+        operationProduct.setFirstNumberOperandProduct(firstNumberOperandProduct);
+        operationProduct.setSecondNumberOperandProduct(secondNumberOperandProduct);
+
+        operationProduct.print();
+
+    </script>
+    
+</body>
+</html>

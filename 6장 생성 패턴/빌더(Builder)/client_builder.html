@@ -21,7 +21,6 @@
 
         operationBuilders[0] = new CALC.builder.AddOperationBuilder(firsNumber, secondNumber);
         operationBuilders[1] = new CALC.builder.SubstractOperationBuilder(firsNumber, secondNumber);
-        operationBuilders[2] = new CALC.builder.MultiplyOperationBuilder(firsNumber, secondNumber);
 
         for (const operationBuilder of operationBuilders) {
             operationDirector = new CALC.builder.OperationDirector(operationBuilder);

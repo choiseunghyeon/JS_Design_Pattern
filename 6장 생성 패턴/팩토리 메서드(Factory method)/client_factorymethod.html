@@ -8,24 +8,21 @@
 </head>
 <body>
     <script src="../../common/js/calc_common.js"></script>
-    <script src="./js/abstract_operation_builder.js"></script>
-    <script src="./js/operation_director.js"></script>
-    <script src="./js/add_operation_builder.js"></script>
-    <script src="./js/substract_operation_builder.js"></script>
-    <script src="./js/multiply_operation_builder.js"></script>
+    <script src="./js/abstract_operation.js"></script>
+    <script src="./js/abstract_operator.js"></script>
+    <script src="./js/add_operator.js"></script>
+    <script src="./js/add_operation.js"></script>
     <script>
         let firsNumber = 100;
         let secondNumber = 20;
-        let operationDirector = null;
-        let operationBuilders = [];
 
-        operationBuilders[0] = new CALC.builder.AddOperationBuilder(firsNumber, secondNumber);
-        operationBuilders[1] = new CALC.builder.SubstractOperationBuilder(firsNumber, secondNumber);
-        operationBuilders[2] = new CALC.builder.MultiplyOperationBuilder(firsNumber, secondNumber);
+        const operations = [new AddOperation()];
 
-        for (const operationBuilder of operationBuilders) {
-            operationDirector = new CALC.builder.OperationDirector(operationBuilder);
-            operationDirector.construct();
+        for (const operation of operations) {
+            operation.setFirstNumber(firsNumber);
+            operation.setSecondNumber(secondNumber);
+
+            operation.operate();
         }
     </script>
     
