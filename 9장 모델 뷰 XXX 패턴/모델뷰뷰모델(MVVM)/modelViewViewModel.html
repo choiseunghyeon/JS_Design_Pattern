@@ -27,18 +27,47 @@
             }
         }
 
-        class CalcPresenter {
+        class DataBinder {
             constructor() {
-                this.calcModel = null;
+                this.calcViewModel = null;
                 this.calcView = null;
             }
 
-            setCalcModel (calcModel) {
-                this.calcModel = calcModel
+            setCalcViewModel(calcViewModel) {
+                this.calcViewModel = calcViewModel;
             }
 
-            setCalcView (calcView) {
+            setCalcView(calcView) {
                 this.calcView = calcView;
+            }
+
+            dataBinding() {
+                let firstNumber = this.calcViewModel.getFirstNumber();
+                let secondNumber = this.calcViewModel.getSecondNumber();
+
+                let addResult = this.calcViewModel.add();
+                let substractResult = this.calcViewModel.substract();
+                let multiplyResult = this.calcViewModel.multiply();
+
+                this.calcView.setFirstNumber(firstNumber);
+                this.calcView.setSecondNumber(secondNumber);
+
+                this.calcView.setAddResult(addResult);
+                this.calcView.setSubstractResult(substractResult);
+                this.calcView.setMultiplyResult(multiplyResult);
+            }
+
+            dataChanged() {
+                this.dataBinding();
+
+                this.calcView.redraw();
+            }
+        }
+
+        class CalcViewModel {
+            constructor() {
+                this.calcModel = null;
+                this.dataBinder = null;
             }
 
             add() {
@@ -60,25 +89,25 @@
                 return firstNumber * secondNumber;
             }
 
-            increaseFirstNumber() {
-                this.calcModel.increaseFirstNumber();
-
-                this.calcView.redraw();
-            }
             decreaseFirstNumber() {
                 this.calcModel.decreaseFirstNumber();
 
-                this.calcView.redraw();
-            }
-            increaseSecondNumber() {
-                this.calcModel.increaseSecondNumber();
-
-                this.calcView.redraw();
+                this.dataBinder.dataChanged();
             }
             decreaseSecondNumber() {
                 this.calcModel.decreaseSecondNumber();
 
-                this.calcView.redraw();
+                this.dataBinder.dataChanged();
+            }
+            increaseFirstNumber() {
+                this.calcModel.increaseFirstNumber();
+
+                this.dataBinder.dataChanged();
+            }
+            increaseSecondNumber() {
+                this.calcModel.increaseSecondNumber();
+
+                this.dataBinder.dataChanged();
             }
 
             getFirstNumber() {
@@ -88,7 +117,91 @@
             getSecondNumber() {
                 return this.calcModel.getSecondNumber();
             }
+
+            setCalcModel(calcModel) {
+                this.calcModel = calcModel;
+            }
+
+            setDataBinder(dataBinder) {
+                this.dataBinder = dataBinder;
+            }
+            
         }
+
+        class CalcCommandReceiver {
+            constructor() {
+                this.calcViewModel = null;
+            }
+
+            setCalcViewModel(calcViewModel) {
+                this.calcViewModel = calcViewModel;
+            }
+
+            increaseFirstNumber() {
+                this.calcViewModel.increaseFirstNumber();
+            }
+
+            decreaseFirstNumber() {
+                this.calcViewModel.decreaseFirstNumber();
+            }
+
+            increaseSecondNumber() {
+                this.calcViewModel.increaseSecondNumber();
+            }
+
+            decreaseSecondNumber() {
+                this.calcViewModel.decreaseSecondNumber();
+            }
+        }
+
+        class AbstractCalcCommand {
+            constructor(receiver) {
+                this.receiver = receiver;
+            }
+
+            execute() {
+                throw new Error('implement this method')
+            }
+        }
+
+        class increaseFirstNumberCalcCommand extends AbstractCalcCommand {
+            constructor(receiver) {
+                super(receiver);
+            }
+
+            execute() {
+                this.receiver.increaseFirstNumber();
+            }
+        }
+        class increaseSecondNumberCalcCommand extends AbstractCalcCommand {
+            constructor(receiver) {
+                super(receiver);
+            }
+
+            execute() {
+                this.receiver.increaseSecondNumber();
+            }
+        }
+        class decreaseFirstNumberCalcCommand extends AbstractCalcCommand {
+            constructor(receiver) {
+                super(receiver);
+            }
+
+            execute() {
+                this.receiver.decreaseFirstNumber();
+            }
+        }
+        class decreaseSecondNumberCalcCommand extends AbstractCalcCommand {
+            constructor(receiver) {
+                super(receiver);
+            }
+
+            execute() {
+                this.receiver.decreaseSecondNumber();
+            }
+        }
+
+
         class CalcModel {
             constructor(){
                 this.firstNumber = 100;
@@ -176,17 +289,15 @@
 
                 offsetY += ROW_HEIGHT;
                 let operator = "+";
-                let result = this.calcPresenter.add();
+
                 this.drawResult(operator, parseInt(this.addResult), offsetX, offsetY);
                 
                 offsetY += ROW_HEIGHT;
                 operator = "-";
-                result = this.calcPresenter.substract()
                 this.drawResult(operator, parseInt(this.substractResult), offsetX, offsetY);
 
                 offsetY += ROW_HEIGHT;
                 operator = "*";
-                result = this.calcPresenter.multiply()
                 this.drawResult(operator, parseInt(this.multiplyResult), offsetX, offsetY);
             }
 
@@ -238,10 +349,6 @@
                 this.drawLine(sx + 5, cy, ex - 5, cy);
             }
 
-            setCalcPresenter(calcPresenter) {
-                this.calcPresenter = calcPresenter
-            }
-
             press(e) {
                 console.log('press');
 
@@ -253,16 +360,43 @@
                 let mouseY = pressPoint.y;
 
 
-                let increaseFirstNumberCalcCommand = 
                 if (this.firstIncreaseButtonArea.contains(mouseX, mouseY)) {
-                    this.calcPresenter.increaseFirstNumber();
+                    let commnad = new increaseFirstNumberCalcCommand(this.calcCommandReceiver);
+                    commnad.execute();
                 } else if (this.firstDecreaseButtonArea.contains(mouseX, mouseY)) {
-                    this.calcPresenter.decreaseFirstNumber();
+                    let commnad = new decreaseFirstNumberCalcCommand(this.calcCommandReceiver);
+                    commnad.execute();
                 } else if (this.secondIncreaseButtonArea.contains(mouseX, mouseY)) {
-                    this.calcPresenter.increaseSecondNumber();
+                    let commnad = new increaseSecondNumberCalcCommand(this.calcCommandReceiver);
+                    commnad.execute();
                 } else if (this.secondDecreaseButtonArea.contains(mouseX, mouseY)) {
-                    this.calcPresenter.decreaseSecondNumber();
+                    let commnad = new decreaseSecondNumberCalcCommand(this.calcCommandReceiver);
+                    commnad.execute();
                 } 
+            }
+
+            setCalcCommandReceiver(calcCommandReceiver) {
+                this.calcCommandReceiver = calcCommandReceiver;
+            }
+
+            setFirstNumber(firstNumber) {
+                this.firstNumber = firstNumber;
+            }
+
+            setSecondNumber(secondNumber) {
+                this.secondNumber = secondNumber;
+            }
+
+            setAddResult(addResult) {
+                this.addResult = addResult;
+            }
+
+            setSubstractResult(substractResult) {
+                this.substractResult = substractResult;
+            }
+
+            setMultiplyResult(multiplyResult) {
+                this.multiplyResult = multiplyResult;
             }
 
             relativePosition(event, element) {
