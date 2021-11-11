@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="module" src="./js/chain/abstract_handler.js"></script>
+    <script type="module" src="./js/chain/abstract_operation_handler.js"></script>
+    <script type="module" src="./js/chain/request.js"></script>
+    <script type="module" src="./js/chain/add_operation_handler.js"></script>
+    <script type="module" src="./js/chain/substract_operation_handler.js"></script>
+    <script type="module" src="./js/chain/multiply_operation_handler.js"></script>
+    <script type="module" src="./js/chain/divide_operation_handler.js"></script>
+    <script type="module" src="./js/chain/operand_handler.js"></script>
+    <script type="module" src="./js/operand/abstract_operand.js"></script>
+    <script type="module" src="./js/operand/number_operand.js"></script>
+    <script type="module" src="./js/chain/client.js"></script>
+
+    <script>
+        let client = new Client();
+        client.main();
+    </script>
+</head>
+<body>
+    <div id="calculator"></div>
+</body>
+</html>

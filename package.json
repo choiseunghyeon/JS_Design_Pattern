@@ -1,0 +1,20 @@
+{
+  "name": "js_design_pattern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "calc": "parcel watch ./10장 계산기 프로젝트/calc_main.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/choiseunghyeon/JS_Design_Pattern.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/choiseunghyeon/JS_Design_Pattern/issues"
+  },
+  "homepage": "https://github.com/choiseunghyeon/JS_Design_Pattern#readme"
+}
