@@ -1,113 +1,442 @@
-import OperandHandler from "./operand_handler";
-import NumberOperand from "../operand/number_operand";
-import Request from "./request";
-import AddOperationHandler from "./add_operation_handler";
-import SubstractOperationHandler from "./substract_operation_handler";
-import MultiplyOperationHandler from "./multiply_operation_handler";
-import DivideOperationHandler from "./divide_operation_handler";
+CALC.createNameSpace("CALC.chain.Client");
 
-export default class Client {
-  main() {
-    this.test1();
-    this.test2();
-    this.test3();
-    this.test4();
-    this.test5();
-    this.test6();
-  }
+CALC.chain.Client = (function() {
+	
+	let OperandHandler = CALC.chain.OperandHandler;
+	let NumberOperand = CALC.operand.NumberOperand;
+	let Request = CALC.chain.Request;
+	let AddOperationHandler = CALC.chain.AddOperationHandler;
+	let SubstractOperationHandler = CALC.chain.SubstractOperationHandler;
+	let MultiplyOperationHandler = CALC.chain.MultiplyOperationHandler;
+	let DivideOperationHandler = CALC.chain.DivideOperationHandler;
+	let FracFunctionOperand = CALC.operand.funct.FracFunctionOperand;
+	let PercentFunctionOperand = CALC.operand.funct.PercentFunctionOperand;
+	let PowFunctionOperand = CALC.operand.funct.PowFunctionOperand;
+	let SqrtFunctionOperand = CALC.operand.funct.SqrtFunctionOperand;
+	
+	class Client {
+		
+		constructor() {
 
-  test1() {
-    let handlerList = [];
+		}
 
-    let operandHandler = new OperandHandler(new NumberOperand("12"));
+		main() {
+			this.test1();
+			this.test2();
+			this.test3();
+			this.test4();
+			this.test5();
+			this.test6();
+			
+			this.testFunction1();
+			this.testFunction2();
+			this.testFunction3();
+			this.testFunction4();
+			this.testFunction5();
+			this.testFunction6();
+		}
 
-    handlerList.push(operandHandler);
+		test1() {
+			let handlerList = [];
 
-    this.tempTest(handlerList);
-  }
+			let operandHandler = new OperandHandler(new NumberOperand("12"));
 
-  test2() {
-    let handlerList = [];
+			handlerList.push(operandHandler);
 
-    let operandHandler = new OperandHandler(new NumberOperand("12"));
-    let addOperationHandler = new AddOperationHandler(new NumberOperand("10"));
+			let handler = null;
+			let nextHandler = null;
+			let i = 0;
+			let handlerListSize = handlerList.length;
+			
+			while (i < handlerListSize - 1) {
+				handler = handlerList[i];
+				nextHandler = handlerList[i + 1];
 
-    handlerList.push(operandHandler);
-    handlerList.push(addOperationHandler);
+				handler.setNext(nextHandler);
 
-    this.tempTest(handlerList);
-  }
+				i += 1;
+			}
 
-  test3() {
-    let handlerList = [];
+			let request = new Request();
+			operandHandler.makeEquation(request);
 
-    let operandHandler = new OperandHandler(new NumberOperand("12"));
-    let substractOperationHandler = new SubstractOperationHandler(new NumberOperand("2"));
+			console.log("request.getEquation() = " + request.getEquation());
 
-    handlerList.push(operandHandler);
-    handlerList.push(substractOperationHandler);
+			request = new Request();
+			operandHandler.handleRequest(request);
 
-    this.tempTest(handlerList);
-  }
+			console.log("request.getResult() = " + request.getResult());
+		}
 
-  test4() {
-    let handlerList = [];
+		test2() {
+			let handlerList = [];
 
-    let operandHandler = new OperandHandler(new NumberOperand("12"));
-    let multiplyOperationHandler = new MultiplyOperationHandler(new NumberOperand("5"));
+			let operandHandler = new OperandHandler(new NumberOperand("12"));
+			let addOperationHandler = new AddOperationHandler(new NumberOperand("10"));
 
-    handlerList.push(operandHandler);
-    handlerList.push(multiplyOperationHandler);
+			handlerList.push(operandHandler);
+			handlerList.push(addOperationHandler);
 
-    this.tempTest(handlerList);
-  }
+			let handler = null;
+			let nextHandler = null;
+			let i = 0;
+			let handlerListSize = handlerList.length;
+			while (i < handlerListSize - 1) {
+				handler = handlerList[i];
+				nextHandler = handlerList[i + 1];
 
-  test5() {
-    let handlerList = [];
+				handler.setNext(nextHandler);
 
-    let operandHandler = new OperandHandler(new NumberOperand("12"));
-    let divideOperationHandler = new DivideOperationHandler(new NumberOperand("3"));
+				i += 1;
+			}
 
-    handlerList.push(operandHandler);
-    handlerList.push(divideOperationHandler);
+			let request = new Request();
+			operandHandler.makeEquation(request);
 
-    this.tempTest(handlerList);
-  }
-  test6() {
-    let handlerList = [];
+			console.log("request.getEquation() = " + request.getEquation());
 
-    let operandHandler = new OperandHandler(new NumberOperand("12"));
-    let substractOperationHandler = new SubstractOperationHandler(new NumberOperand("2"));
-    let multiplyOperationHandler = new MultiplyOperationHandler(new NumberOperand("5"));
-    let divideOperationHandler = new DivideOperationHandler(new NumberOperand("3"));
+			request = new Request();
+			operandHandler.handleRequest(request);
 
-    handlerList.push(operandHandler);
-    handlerList.push(substractOperationHandler);
-    handlerList.push(multiplyOperationHandler);
-    handlerList.push(divideOperationHandler);
+			console.log("request.getResult() = " + request.getResult());
+		}
 
-    this.tempTest(handlerList);
-  }
+		test3() {
+			let handlerList = [];
 
-  tempTest(handlerList) {
-    let handler = null;
-    let nextHandler = null;
+			let operandHandler = new OperandHandler(new NumberOperand("12"));
+			let substractOperationHandler = new SubstractOperationHandler(new NumberOperand("2"));
 
-    for (let index = 0; index < handlerList.length; index++) {
-      handler = handlerList[index];
-      nextHandler = handlerList[index + 1];
+			handlerList.push(operandHandler);
+			handlerList.push(substractOperationHandler);
 
-      handler.setNext(nextHandler);
-    }
+			let handler = null;
+			let nextHandler = null;
+			let i = 0;
+			let handlerListSize = handlerList.length;
+			while (i < handlerListSize - 1) {
+				handler = handlerList[i];
+				nextHandler = handlerList[i + 1];
 
-    let request = new Request();
-    operandHandler.makeEquation(request);
+				handler.setNext(nextHandler);
 
-    console.log(`request.getEquation() = ${request.getEquation()}`);
+				i += 1;
+			}
 
-    request = new Request();
-    operandHandler.handleRequest(request);
+			let request = new Request();
+			operandHandler.makeEquation(request);
 
-    console.log(`request.getResult() = ${request.getResult()}`);
-  }
-}
+			console.log("request.getEquation() = " + request.getEquation());
+
+			request = new Request();
+			operandHandler.handleRequest(request);
+
+			console.log("request.getResult() = " + request.getResult());
+		}
+
+		test4() {
+			let handlerList = [];
+
+			let operandHandler = new OperandHandler(new NumberOperand("12"));
+			let multiplyOperationHandler = new MultiplyOperationHandler(new NumberOperand("5"));
+
+			handlerList.push(operandHandler);
+			handlerList.push(multiplyOperationHandler);
+
+			let handler = null;
+			let nextHandler = null;
+			let i = 0
+			let handlerListSize = handlerList.length;
+			while (i < handlerListSize - 1) {
+				handler = handlerList[i];
+				nextHandler = handlerList[i + 1];
+
+				handler.setNext(nextHandler);
+
+				i += 1;
+			}
+
+			let request = new Request();
+			operandHandler.makeEquation(request);
+
+			console.log("request.getEquation() = " + request.getEquation());
+
+			request = new Request();
+			operandHandler.handleRequest(request);
+
+			console.log("request.getResult() = " + request.getResult());
+		}
+
+		test5() {
+			let handlerList = [];
+
+			let operandHandler = new OperandHandler(new NumberOperand("12"));
+			let divideOperationHandler = new DivideOperationHandler(new NumberOperand("3"));
+
+			handlerList.push(operandHandler);
+			handlerList.push(divideOperationHandler);
+
+			let handler = null;
+			let nextHandler = null;
+			let i = 0;
+			let handlerListSize = handlerList.length;
+			while (i < handlerListSize - 1) {
+				handler = handlerList[i];
+				nextHandler = handlerList[i + 1];
+
+				handler.setNext(nextHandler);
+
+				i += 1;
+			}
+
+			let request = new Request();
+			operandHandler.makeEquation(request);
+
+			console.log("request.getEquation() = " + request.getEquation());
+
+			request = new Request();
+			operandHandler.handleRequest(request);
+
+			console.log("request.getResult() = " + request.getResult());
+		}
+
+		test6() {
+			let handlerList = [];
+
+			let operandHandler = new OperandHandler(new NumberOperand("12"));
+
+			let addOperationHandler = new AddOperationHandler(new NumberOperand("10"));
+			let substractOperationHandler = new SubstractOperationHandler(new NumberOperand("2"));
+			let multiplyOperationHandler = new MultiplyOperationHandler(new NumberOperand("5"));
+			let divideOperationHandler = new DivideOperationHandler(new NumberOperand("3"));
+
+			handlerList.push(operandHandler);
+
+			handlerList.push(addOperationHandler);
+			handlerList.push(substractOperationHandler);
+			handlerList.push(multiplyOperationHandler);
+			handlerList.push(divideOperationHandler);
+
+			let handler = null;
+			let nextHandler = null;
+			let i = 0;
+			let handlerListSize = handlerList.length;
+			while (i < handlerListSize - 1) {
+				handler = handlerList[i];
+				nextHandler = handlerList[i + 1];
+
+				handler.setNext(nextHandler);
+
+				i += 1;
+			}
+
+			let request = new Request();
+			operandHandler.makeEquation(request);
+
+			console.log("request.getEquation() = " + request.getEquation());
+
+			request = new Request();
+			operandHandler.handleRequest(request);
+
+			console.log("request.getResult() = " + request.getResult());
+		}
+		
+	    testFunction1() {
+	        let handlerList = [];
+	        
+	        let operandHandler = new OperandHandler(new FracFunctionOperand(new NumberOperand("10")));
+	        
+	        handlerList.push(operandHandler);
+	        
+	        let handler = null;
+	        let nextHandler = null;
+	        let i = 0;
+	        let handlerListSize = handlerList.length;
+	        while (i < handlerListSize - 1) {
+	            handler = handlerList[i];
+	            nextHandler = handlerList[i + 1];
+	            
+	            handler.setNext(nextHandler);
+	            
+	            i += 1;
+	        }
+	        
+	        let request = new Request();
+	        operandHandler.makeEquation(request);
+	        
+	        console.log("request.getEquation() = " + request.getEquation());         
+
+	        request = new Request();
+	        operandHandler.handleRequest(request);
+	        
+	        console.log("request.getResult() = " + String(request.getResult()));
+	    }
+	        
+	    testFunction2() {
+	    	let handlerList = [];
+	        
+	    	let percentFunctionOperand = new PercentFunctionOperand(new NumberOperand("10"));
+	        percentFunctionOperand.setPercent(0.5);
+	        
+	        let operandHandler = new OperandHandler(percentFunctionOperand);
+	        
+	        handlerList.push(operandHandler);
+	        
+	        let handler = null;
+	        let nextHandler = null;
+	        let i = 0;
+	        let handlerListSize = handlerList.length;
+	        while (i < handlerListSize - 1) {
+	            handler = handlerList[i];
+	            nextHandler = handlerList[i + 1];
+	            
+	            handler.setNext(nextHandler);
+	            
+	            i += 1;
+	        }
+	        
+	        let request = new Request();
+	        operandHandler.makeEquation(request);
+	        
+	        console.log("request.getEquation() = " + request.getEquation());             
+
+	        request = new Request();
+	        operandHandler.handleRequest(request);
+	        
+	        console.log("request.getResult() = " + String(request.getResult()));
+	    }
+	    
+	    testFunction3() {
+	    	let handlerList = [];
+	        
+	    	let operandHandler = new OperandHandler(new PowFunctionOperand(new NumberOperand("10")));
+	        
+	        handlerList.push(operandHandler);
+	        
+	        let handler = null;
+	        let nextHandler = null;
+	        let i = 0;
+	        let handlerListSize = handlerList.length;
+	        while (i < handlerListSize - 1) {
+	            handler = handlerList[i];
+	            nextHandler = handlerList[i + 1];
+	            
+	            handler.setNext(nextHandler);
+	            
+	            i += 1;
+	        }
+	        
+	        let request = new Request();
+	        operandHandler.makeEquation(request);
+	        
+	        console.log("request.getEquation() = " + request.getEquation());             
+
+	        request = new Request();
+	        operandHandler.handleRequest(request);
+	        
+	        console.log("request.getResult() = " + String(request.getResult()));
+	    }
+	    
+	    testFunction4() {
+	    	let handlerList = [];
+	        
+	    	let operandHandler = new OperandHandler(new SqrtFunctionOperand(new NumberOperand("10")));
+	        
+	        handlerList.push(operandHandler);
+	        
+	        let handler = null;
+	        let nextHandler = null;
+	        let i = 0;
+	        let handlerListSize = handlerList.length;
+	        while (i < handlerListSize - 1) {
+	            handler = handlerList[i];
+	            nextHandler = handlerList[i + 1];
+	            
+	            handler.setNext(nextHandler);
+	            
+	            i += 1;
+	        }
+	        
+	        let request = new Request();
+	        operandHandler.makeEquation(request);
+	        
+	        console.log("request.getEquation() = " + request.getEquation());             
+
+	        request = new Request();
+	        operandHandler.handleRequest(request);
+	        
+	        console.log("request.getResult() = " + String(request.getResult()));
+	    }
+	    
+	    testFunction5() {
+	    	let handlerList = [];
+	        
+	    	let operandHandler = new OperandHandler(new NumberOperand("12"));
+	    	let addOperationHandler = new AddOperationHandler(new FracFunctionOperand(new NumberOperand("10")));
+	        
+	        handlerList.push(operandHandler);
+	        handlerList.push(addOperationHandler);
+	        
+	        let handler = null;
+	        let nextHandler = null;
+	        let i = 0;
+	        let handlerListSize = handlerList.length;
+	        while (i < handlerListSize - 1) {
+	            handler = handlerList[i];
+	            nextHandler = handlerList[i + 1];
+	            
+	            handler.setNext(nextHandler);
+	            
+	            i += 1;
+	        }
+	        
+	        let request = new Request();
+	        operandHandler.makeEquation(request);
+	        
+	        console.log("request.getEquation() = " + request.getEquation());         
+
+	        request = new Request();
+	        operandHandler.handleRequest(request);
+	        
+	        console.log("request.getResult() = " + String(request.getResult()));
+	    }
+	    
+	    testFunction6() {
+	    	let handlerList = [];
+	        
+	    	let operandHandler = new OperandHandler(new NumberOperand("12"));
+	        
+	    	let addOperationHandler = new AddOperationHandler(new PowFunctionOperand(new FracFunctionOperand(new NumberOperand("10"))));
+	        
+	        handlerList.push(operandHandler);
+	        handlerList.push(addOperationHandler);
+	        
+	        let handler = null;
+	        let nextHandler = null;
+	        let i = 0;
+	        let handlerListSize = handlerList.length;
+	        while (i < handlerListSize - 1) {
+	            handler = handlerList[i];
+	            nextHandler = handlerList[i + 1];
+	            
+	            handler.setNext(nextHandler);
+	            
+	            i += 1;
+	        }
+	        
+	        let request = new Request();
+	        operandHandler.makeEquation(request);
+	        
+	        console.log("request.getEquation() = " + request.getEquation());             
+
+	        request = new Request();
+	        operandHandler.handleRequest(request);
+	        
+	        console.log("request.getResult() = " + String(request.getResult()));
+	    }
+		
+	}
+	
+	return Client;
+
+}());

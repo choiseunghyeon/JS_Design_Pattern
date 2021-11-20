@@ -152,7 +152,7 @@ var AbstractHandler = /*#__PURE__*/function () {
         var result = this.operate(request);
         request.setResult(result);
 
-        if (this.next !== null) {
+        if (this.next) {
           this.next.handleRequest(request);
         }
       }
@@ -163,8 +163,8 @@ var AbstractHandler = /*#__PURE__*/function () {
       var desc = this.getEquation(request);
       request.appendEquation(desc);
 
-      if (this.next !== null) {
-        this.next.appendEquation(request);
+      if (this.next) {
+        this.next.makeEquation(request);
       }
     }
   }, {
@@ -384,7 +384,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63122" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50603" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

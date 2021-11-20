@@ -1,23 +1,33 @@
-import AbstractHandler from "./abstract_handler";
+CALC.createNameSpace("CALC.chain.AbstractOperationHandler");
 
-export default class AbstractOperationHandler extends AbstractHandler {
-  constructor(operand) {
-    super(operand);
-  }
+CALC.chain.AbstractOperationHandler = (function() {
 
-  getOperator() {
-    throw new Error("implement this method");
-  }
+	let AbstractHandler = CALC.chain.AbstractHandler;
+	
+	class AbstractOperationHandler extends AbstractHandler {
+		
+		constructor(operand) {
+			super(operand);
+		}
+		
+		getOperator() {
+			throw new Error("You have to implement the method doSomething!");
+		}
 
-  getEquation(request) {
-    return ` ${this.getOperator()} ${this.getOperandDesc()}`;
-  }
+		getEquation(request) {
+			return " " + this.getOperator() + " " + this.getOperandDesc();
+		}
 
-  isOperation() {
-    return true;
-  }
+		isOperation() {
+			return true;
+		}
 
-  operateNumber(firstNumber, secondNumber) {
-    throw new Error("implement this method");
-  }
-}
+		operateNumber(firstNumber, secondNumber) {
+			throw new Error("You have to implement the method doSomething!");
+		}
+		
+	}
+
+	return AbstractOperationHandler;
+
+}());

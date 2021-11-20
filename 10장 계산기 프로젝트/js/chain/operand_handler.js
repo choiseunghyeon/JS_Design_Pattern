@@ -1,16 +1,27 @@
-import AbstractHandler from "./abstract_handler";
+CALC.createNameSpace("CALC.chain.OperandHandler");
 
-export default class OperandHandler extends AbstractHandler {
-  constructor(operand) {
-    super(operand);
-  }
+CALC.chain.OperandHandler = (function() {
 
-  operate(request) {
-    let value = this.getOperandValue();
-    return value;
-  }
+	let AbstractHandler = CALC.chain.AbstractHandler;
+	
+	class OperandHandler extends AbstractHandler {
+		
+		constructor(operand) {
+	        super(operand);
+	    }
+	    
+		operate(request) {
+	        let value = this.getOperandValue();
+	        
+	        return value;
+	    }
+	    
+		getEquation(request) {
+			return this.getOperandDesc();
+	    }
+		
+	}
 
-  getEquation(request) {
-    return this.getOperandDesc();
-  }
-}
+    return OperandHandler;
+
+}());

@@ -1,14 +1,29 @@
-export default class AbstractOperand {
-  constructor(operand) {}
+CALC.createNameSpace("CALC.operand.AbstractOperand");
 
-  getValue() {
-    throw new Error("implement this method");
-  }
-  getDesc() {
-    throw new Error("implement this method");
-  }
+CALC.operand.AbstractOperand = (function() {
+	
+	class AbstractOperand {
+		
+		constructor(operand) {
 
-  isNumber() {
-    return false;
-  }
-}
+		}
+
+		getValue() {
+			throw new Error("You have to implement the method doSomething!");
+		}
+
+		getDesc() {
+			throw new Error("You have to implement the method doSomething!");
+		}
+
+		isNumber() {
+			return false;
+		}
+		
+	}
+
+	
+
+	return AbstractOperand;
+
+}());

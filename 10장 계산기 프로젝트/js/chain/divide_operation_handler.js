@@ -1,22 +1,32 @@
-import AbstractOperationHandler from "./abstract_operation_handler";
+CALC.createNameSpace("CALC.chain.DivideOperationHandler");
 
-export default class DivideOperationHandler extends AbstractOperationHandler {
-  constructor(operand) {
-    super(operand);
-  }
+CALC.chain.DivideOperationHandler = (function() {
 
-  operate(request) {
-    let firstNumber = request.getResult();
-    let secondNumber = this.getOperandValue();
+	let AbstractOperationHandler = CALC.chain.AbstractOperationHandler;
+	
+	class DivideOperationHandler extends AbstractOperationHandler {
+		
+		constructor(operand) {
+			super(operand);
+		}
+		
+		operate(request) {
+			let firstNumber = request.getResult();
+			let secondNumber = this.getOperandValue();
 
-    return firstNumber / secondNumber;
-  }
+			return firstNumber / secondNumber;
+		}
 
-  getOperator() {
-    return "/";
-  }
+		getOperator() {
+			return "/";
+		}
 
-  operateNumber(firstNumber, secondNumber) {
-    return firstNumber / secondNumber;
-  }
-}
+		operateNumber(firstNumber, secondNumber) {
+			return firstNumber / secondNumber;
+		}
+		
+	}
+
+	return DivideOperationHandler;
+
+}());

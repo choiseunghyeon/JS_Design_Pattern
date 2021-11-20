@@ -1,22 +1,32 @@
-import AbstractOperationHandler from "./abstract_operation_handler";
+CALC.createNameSpace("CALC.chain.AddOperationHandler");
 
-export default class AddOperationHandler extends AbstractOperationHandler {
-  constructor(operand) {
-    super(operand);
-  }
+CALC.chain.AddOperationHandler = (function() {
 
-  operate(request) {
-    let firstNumber = request.getResult();
-    let secondNumber = this.getOperandValue();
+	let AbstractOperationHandler = CALC.chain.AbstractOperationHandler;
+	
+	class AddOperationHandler extends AbstractOperationHandler {
+		
+		constructor(operand) {
+			super(operand);
+		}
 
-    return firstNumber + secondNumber;
-  }
+		operate(request) {
+			let firstNumber = request.getResult();
+			let secondNumber = this.getOperandValue();
 
-  getOperator() {
-    return "+";
-  }
+			return firstNumber + secondNumber;
+		}
 
-  operateNumber(firstNumber, secondNumber) {
-    return firstNumber + secondNumber;
-  }
-}
+		getOperator() {
+			return "+";
+		}
+
+		operateNumber(firstNumber, secondNumber) {
+			return firstNumber + secondNumber;
+		}
+		
+	}
+
+	return AddOperationHandler;
+
+}());

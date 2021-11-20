@@ -1,29 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<title>Calculator</title>
 
-    <script type="module" src="./js/chain/abstract_handler.js"></script>
-    <script type="module" src="./js/chain/abstract_operation_handler.js"></script>
-    <script type="module" src="./js/chain/request.js"></script>
-    <script type="module" src="./js/chain/add_operation_handler.js"></script>
-    <script type="module" src="./js/chain/substract_operation_handler.js"></script>
-    <script type="module" src="./js/chain/multiply_operation_handler.js"></script>
-    <script type="module" src="./js/chain/divide_operation_handler.js"></script>
-    <script type="module" src="./js/chain/operand_handler.js"></script>
-    <script type="module" src="./js/operand/abstract_operand.js"></script>
-    <script type="module" src="./js/operand/number_operand.js"></script>
-    <script type="module" src="./js/chain/client.js"></script>
-
-    <script>
-        let client = new Client();
-        client.main();
-    </script>
+	<script src="./js/common/calc_common.js"></script>
+	<script src="./js/chain/abstract_handler.js"></script>
+	<script src="./js/chain/abstract_operation_handler.js"></script>
+	<script src="./js/chain/request.js"></script>
+	<script src="./js/chain/add_operation_handler.js"></script>
+	<script src="./js/chain/multiply_operation_handler.js"></script>
+	<script src="./js/chain/substract_operation_handler.js"></script>
+	<script src="./js/chain/divide_operation_handler.js"></script>
+	<script src="./js/chain/operand_handler.js"></script>
+	<script src="./js/operand/abstract_operand.js"></script>
+	<script src="./js/operand/number_operand.js"></script>
+	<script src="./js/operand/funct/abstract_function_operand.js"></script>
+	<script src="./js/operand/funct/frac_function_operand.js"></script>
+	<script src="./js/operand/funct/percent_function_operand.js"></script>
+	<script src="./js/operand/funct/pow_function_operand.js"></script>
+	<script src="./js/operand/funct/sqrt_function_operand.js"></script>
+	<script src="./js/chain/client.js"></script>
+	<script src="./js/app/calc_constants.js"></script>
+	<script src="./js/app/calc_display_view.js"></script>
+	<script src="./js/app/calc_equation_view.js"></script>
+	<script src="./js/app/calc_main_frame.js"></script>
+	<script src="./js/app/input_panel.js"></script>
+	<script src="./js/app/calc_util.js"></script>
+	<script src="./js/model/calc_model.js"></script>
+	<script src="./js/state/icontext.js"></script>
+	<script src="./js/state/istate.js"></script>
+	<script src="./js/command/abstract_command.js"></script>
+	<script src="./js/command/add_operation_command.js"></script>
+	<script src="./js/command/divide_operation_command.js"></script>
+	<script src="./js/command/equal_operation_command.js"></script>
+	<script src="./js/command/multiply_operation_command.js"></script>
+	<script src="./js/command/number_command.js"></script>
+	<script src="./js/command/substract_operation_command.js"></script>
+	<script src="./js/command/calc_command_receiver.js"></script>
+	<script src="./js/command/clear_back_command.js"></script>
+	<script src="./js/command/clear_command.js"></script>
+	<script src="./js/command/clear_error_command.js"></script>
+	<script src="./js/command/frac_function_command.js"></script>
+	<script src="./js/command/percent_function_command.js"></script>
+	<script src="./js/command/pow_function_command.js"></script>
+	<script src="./js/command/sqrt_function_command.js"></script>
+	<script src="./js/command/plus_minus_command.js"></script>
+	<script src="./js/state/equal_state.js"></script>
+	<script src="./js/state/input_state.js"></script>
+	<script src="./js/state/operator_state.js"></script>
+	<script src="./js/state/function_state.js"></script>
+	<script src="./js/app/calc_state_view.js"></script>	
+	
+	<script>
+		window.onload = function() {
+			let calcMain = new CALC.app.CalcMainFrame("calculator");
+		};
+	</script>
 </head>
 <body>
-    <div id="calculator"></div>
+	<div id = "calculator"></div>
 </body>
 </html>

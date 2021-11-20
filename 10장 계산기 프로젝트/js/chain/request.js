@@ -1,23 +1,33 @@
-export default class Request {
-  constructor() {
-    this.result = null;
+CALC.createNameSpace("CALC.chain.Request");
 
-    this.sbEquation = "";
-  }
+CALC.chain.Request = (function() {
+	
+	class Request {
+		
+		constructor() {
+			this.result = null;
 
-  getResult() {
-    return this.result;
-  }
+			this.sbEquation = "";
+		}
 
-  setResult(result) {
-    this.result = result;
-  }
+		getResult() {
+			return this.result;
+		}
 
-  appendEquation(desc) {
-    this.sbEquation += desc;
-  }
+		setResult(result) {
+			this.result = result;
+		}
 
-  getEquation() {
-    return this.sbEquation;
-  }
-}
+		appendEquation(desc) {
+			this.sbEquation += desc;
+		}
+
+		getEquation() {
+			return this.sbEquation;
+		}
+		
+	}
+
+	return Request;
+
+}());

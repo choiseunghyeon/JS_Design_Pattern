@@ -1,50 +1,67 @@
-import AbstractOperand from "./abstract_operand";
+CALC.createNameSpace("CALC.operand.NumberOperand");
 
-export default class NumberOperand extends AbstractOperand {
-  constructor(input) {
-    super();
+CALC.operand.NumberOperand = (function() {
 
-    this.inputs = [];
+	let AbstractOperand = CALC.operand.AbstractOperand;
+	
+	class NumberOperand extends AbstractOperand {
+		
+		constructor(input) {
+	        super();
+	        
+	        this.inputs = [];
+	        
+	        if (input !== null) {
+	            this.inputs.push(input);
+	        }
+	    }
+	    
+	    getValue() {
+	        let inputText = this.getInputText();
+	        
+	        if (inputText.length > 0) {
+	            return parseFloat(inputText);
+	        }
+	        
+	        return 0;
+	    }
 
-    if (input !== null) {
-      this.inputs.push(input);
-    }
-  }
+	    getDesc() {
+	        return this.getInputText();
+	    }
+	    
+	    append(input) {
+	        this.inputs.push(input);
+	    }
 
-  getValue() {
-    let inputText = this.getInputText();
+	    clearBack() {
+	        let size = this.inputs.length;
+	        
+	        if (size > 0) {
+	        	this.inputs.splice(size - 1, 1);
+	        }
+	    }
 
-    if (inputText.length > 0) {
-      return parseFloat(inputText);
-    }
+	    clearInput() {
+	        this.inputs = [];
+	    }
 
-    return 0;
-  }
+	    getInputText() {
+	        let sb = "";
+	        
+	        for(let input of this.inputs) {
+	            sb += String(input);
+	        }
+	        
+	        return sb;
+	    }
 
-  getDesc() {
-    return this.getInputText();
-  }
+	    isNumber() {
+	        return true;
+	    }
+		
+	}
 
-  append(input) {
-    this.inputs.push(input);
-  }
+    return NumberOperand;
 
-  clearBack() {
-    const size = this.inputs.length;
-    if (size > 0) {
-      this.inputs.splice(size - 1, 1);
-    }
-  }
-
-  clearInput() {
-    this.inputs = [];
-  }
-
-  getInputText() {
-    return this.inputs.reduce((result, input) => result + String(input), "");
-  }
-
-  isNumber() {
-    return true;
-  }
-}
+}());

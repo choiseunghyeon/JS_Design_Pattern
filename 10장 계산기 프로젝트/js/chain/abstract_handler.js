@@ -1,67 +1,89 @@
-export default class AbstractHandler {
-  constructor(operand) {
-    this.operand = operand;
-    this.next = null;
-  }
+CALC.createNameSpace("CALC.chain.AbstractHandler");
 
-  setNext(next) {
-    this.next = next;
-    return this.next;
-  }
+CALC.chain.AbstractHandler = (function() {
+	
+	class AbstractHandler {
+		
+		constructor(operand) {
+			this.operand = operand;
+			this.next = null;
+		}
 
-  handleRequest(request) {
-    if (this.hasOperand()) {
-      let result = this.operate(request);
-      request.setResult(result);
+		setNext(next) {
+			this.next = next;
+			return this.next;
+		}
 
-      if (this.next !== null) {
-        this.next.handleRequest(request);
-      }
-    }
-  }
+		handleRequest(request) {
+			if (this.hasOperand()) {
+				if (this.next !== null) {
+					let result = this.operate(request);
+					request.setResult(result);
 
-  makeEquation(request) {
-    let desc = this.getEquation(request);
-    request.appendEquation(desc);
+					this.next.handleRequest(request);
+				}
+				else {
+					let result = this.operate(request);
+					request.setResult(result);
+				}
+			}
+		}
 
-    if (this.next !== null) {
-      this.next.appendEquation(request);
-    }
-  }
+		makeEquation(request) {
+			if (this.next !== null) {
+				let desc = this.getEquation(request);
+				request.appendEquation(desc);
 
-  getOperandValue() {
-    return this.operand.getValue();
-  }
+				this.next.makeEquation(request);
+			}
+			else {
+				let desc = this.getEquation(request);
+				request.appendEquation(desc);
+			}
+		}
 
-  getOperandDesc() {
-    return this.hasOperand() ? this.operand.getDesc() : "";
-  }
+		getOperandValue() {
+			return this.operand.getValue();
+		}
 
-  operate(request) {
-    throw new Error("implement this method");
-  }
+		getOperandDesc() {
+			if (this.hasOperand()) {
+				return this.operand.getDesc();
+			} else {
+				return ""
+			}
+		}
 
-  getEquation(request) {
-    throw new Error("implement this method");
-  }
+		operate(request) {
+			throw new Error("You have to implement the method doSomething!");
+		}
 
-  hasOperand() {
-    if (this.operand !== null) {
-      return true;
-    }
+		getEquation(request) {
+			throw new Error("You have to implement the method doSomething!");
+		}
 
-    return false;
-  }
+		hasOperand() {
+			if (this.operand !== null) {
+				return true
+			}
 
-  isOperation() {
-    return false;
-  }
+			return false
+		}
 
-  getOperand() {
-    return this.operand;
-  }
+		isOperation() {
+			return false
+		}
 
-  setOperand(operand) {
-    this.operand = operand;
-  }
-}
+		getOperand() {
+			return this.operand
+		}
+
+		setOperand(operand) {
+			this.operand = operand
+		}
+		
+	}
+
+	return AbstractHandler;
+
+}());
