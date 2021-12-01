@@ -2,6 +2,10 @@ PAINTER.createNameSpace("PAINTER.view.panel.ToolButtonPanel");
 
 PAINTER.view.panel.ToolButtonPanel = (function () {
   class ToolButtonPanel {
+    constructor(painterView) {
+      this.painterView = painterView;
+    }
+
     initLayout() {
       let toolbar = document.getElementById("toolbar");
 

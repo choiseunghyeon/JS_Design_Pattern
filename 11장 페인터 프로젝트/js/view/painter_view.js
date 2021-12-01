@@ -5,6 +5,10 @@ PAINTER.view.PainterView = (function () {
     constructor() {
       let PainterConstants = PAINTER.app.PainterConstants;
 
+      let PainterModel = PAINTER.model.PainterModel;
+      let LinePiece = PAINTER.model.piece.LinePiece;
+      let RectanglePiece = PAINTER.model.piece.RectanglePiece;
+
       // 캔버스 요소 가져오기
       let canvas = document.getElementById("mycanvas");
       canvas.width = PainterConstants.PAINTER_WIDTH;
@@ -21,16 +25,15 @@ PAINTER.view.PainterView = (function () {
       ctx.fillStyle = "blue";
 
       this.ctx = ctx;
+
+      this.painterModel = new PainterModel();
+
+      this.painterModel.addPiece(new LinePiece(50, 50, 100, 80));
+      this.painterModel.addPiece(new RectanglePiece(110, 20, 100, 50));
     }
 
     repaint() {
-      let x = 10;
-      let y = 20;
-      let w = 100;
-      let h = 50;
-
-      this.ctx.fillRect(x, y, w, h);
-      this.ctx.strokeRect(x, y, w, h);
+      this.painterModel.drawPieces(this.ctx);
     }
   }
 
