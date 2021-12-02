@@ -7,15 +7,8 @@ PAINTER.model.PainterModel = (function () {
     }
 
     drawPieces(ctx) {
-      let RectanglePiece = PAINTER.model.piece.RectanglePiece;
-      let LinePiece = PAINTER.model.piece.LinePiece;
-
       for (const piece of this.pieces) {
-        if (piece instanceof LinePiece) {
-          piece.drawLine(ctx);
-        } else if (piece instanceof RectanglePiece) {
-          piece.drawRect(ctx);
-        }
+        piece.draw(ctx);
       }
     }
 

@@ -1,12 +1,10 @@
 PAINTER.createNameSpace("PAINTER.model.piece.RectanglePiece");
 
 PAINTER.model.piece.RectanglePiece = (function () {
-  class RectanglePiece {
+  let AbstractPiece = PAINTER.model.piece.AbstractPiece;
+  class RectanglePiece extends AbstractPiece {
     constructor(x, y, width, height) {
-      this.strokeColor = "red";
-      this.strokeWidth = 10;
-
-      this.fillColor = "blue";
+      super();
 
       this.x = x;
       this.y = y;
@@ -14,7 +12,7 @@ PAINTER.model.piece.RectanglePiece = (function () {
       this.height = height;
     }
 
-    drawRect(ctx) {
+    draw(ctx) {
       ctx.lineWidth = this.strokeWidth;
       ctx.strokeStyle = this.strokeColor;
       ctx.fillStyle = this.fillColor;

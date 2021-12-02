@@ -8,6 +8,7 @@ PAINTER.view.PainterView = (function () {
       let PainterModel = PAINTER.model.PainterModel;
       let LinePiece = PAINTER.model.piece.LinePiece;
       let RectanglePiece = PAINTER.model.piece.RectanglePiece;
+      let EllipsePiece = PAINTER.model.piece.EllipsePiece;
 
       // 캔버스 요소 가져오기
       let canvas = document.getElementById("mycanvas");
@@ -20,16 +21,13 @@ PAINTER.view.PainterView = (function () {
       // 캔버스 렌더링 컨텍스트 가져오기
       let ctx = canvas.getContext("2d");
 
-      ctx.lineWidth = 10;
-      ctx.strokeStyle = "red";
-      ctx.fillStyle = "blue";
-
       this.ctx = ctx;
 
       this.painterModel = new PainterModel();
 
       this.painterModel.addPiece(new LinePiece(50, 50, 100, 80));
       this.painterModel.addPiece(new RectanglePiece(110, 20, 100, 50));
+      this.painterModel.addPiece(new EllipsePiece(110, 120, 100, 80));
     }
 
     repaint() {

@@ -1,18 +1,17 @@
 PAINTER.createNameSpace("PAINTER.model.piece.LinePiece");
 
 PAINTER.model.piece.LinePiece = (function () {
-  class LinePiece {
+  let AbstractPiece = PAINTER.model.piece.AbstractPiece;
+  class LinePiece extends AbstractPiece {
     constructor(startX, startY, endX, endY) {
-      this.strokeColor = "green";
-      this.strokeWidth = 10;
-
+      super();
       this.startX = startX;
       this.startY = startY;
       this.endX = endX;
       this.endY = endY;
     }
 
-    drawLine(ctx) {
+    draw(ctx) {
       ctx.lineWidth = this.strokeWidth;
       ctx.strokeStyle = this.strokeColor;
 
