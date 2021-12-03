@@ -12,8 +12,7 @@ PAINTER.model.piece.LinePiece = (function () {
     }
 
     draw(ctx) {
-      ctx.lineWidth = this.strokeWidth;
-      ctx.strokeStyle = this.strokeColor;
+      this.applyStyle(ctx);
 
       ctx.beginPath();
       ctx.moveTo(this.startX, this.startY);

@@ -13,10 +13,7 @@ PAINTER.model.piece.EllipsePiece = (function () {
     }
 
     draw(ctx) {
-      ctx.lineWidth = this.strokeWidth;
-      ctx.strokeStyle = this.strokeColor;
-      ctx.fillStyle = this.fillColor;
-
+      this.applyStyle(ctx);
       this.drawEllipseByBezierCurve(ctx, this.x, this.y, this.width, this.height);
     }
 
