@@ -20,6 +20,28 @@ PAINTER.view.panel.ToolButtonPanel = (function () {
 
       inputImage = this.createButton("./images/free_path.gif", "btnFreePath");
       toolbar.appendChild(inputImage);
+
+      let btnLine = document.getElementById("btnLine");
+      let btnRectangle = document.getElementById("btnRectangle");
+      let btnEllipse = document.getElementById("btnEllipse");
+      let btnFreePath = document.getElementById("btnFreePath");
+
+      let PainterConstants = PAINTER.app.PainterConstants;
+
+      let painterViewThis = this.painterView;
+
+      btnLine.addEventListener("click", function (e) {
+        painterViewThis.setPieceType(PainterConstants.LINE);
+      });
+      btnRectangle.addEventListener("click", function (e) {
+        painterViewThis.setPieceType(PainterConstants.RECTANGLE);
+      });
+      btnEllipse.addEventListener("click", function (e) {
+        painterViewThis.setPieceType(PainterConstants.ELLIPSE);
+      });
+      btnFreePath.addEventListener("click", function (e) {
+        painterViewThis.setPieceType(PainterConstants.FREE_PATH);
+      });
     }
 
     createButton(imagePath, id) {
