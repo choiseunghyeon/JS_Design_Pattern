@@ -14,10 +14,10 @@ PAINTER.model.piece.EllipsePiece = (function () {
 
     draw(ctx) {
       this.applyStyle(ctx);
-      this.drawEllipseByBezierCurve(ctx, this.x, this.y, this.width, this.height);
+      EllipsePiece.drawEllipseByBezierCurve(ctx, this.x, this.y, this.width, this.height);
     }
 
-    drawEllipseByBezierCurve(ctx, x, y, w, h) {
+    static drawEllipseByBezierCurve(ctx, x, y, w, h) {
       let kappa = 0.5522848,
         ox = (w / 2) * kappa,
         oy = (h / 2) * kappa,

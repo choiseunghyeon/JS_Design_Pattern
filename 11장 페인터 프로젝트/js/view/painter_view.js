@@ -35,6 +35,8 @@ PAINTER.view.PainterView = (function () {
       this.endX = 0;
       this.endY = 0;
 
+      this.points = [];
+
       canvas.addEventListener("mousedown", this.handleMouseEvent.bind(this));
     }
 
@@ -49,6 +51,8 @@ PAINTER.view.PainterView = (function () {
       painterViewThis.startX = pressPoint.x;
       painterViewThis.startY = pressPoint.y;
 
+      this.points = [];
+
       console.log(`mousedown p.x = ${pressPoint.x} p.y = ${pressPoint.y}`);
 
       let mousemoveEventListenr = function (e) {
@@ -57,6 +61,7 @@ PAINTER.view.PainterView = (function () {
         painterViewThis.endX = movePoint.x;
         painterViewThis.endY = movePoint.y;
 
+        painterViewThis.points.push(movePoint);
         painterViewThis.ctx.putImageData(canvasImageData, 0, 0);
         painterViewThis.drawing(painterViewThis.ctx);
 
@@ -70,6 +75,7 @@ PAINTER.view.PainterView = (function () {
         painterViewThis.endX = upPoint.x;
         painterViewThis.endY = upPoint.y;
 
+        painterViewThis.points.push(upPoint);
         painterViewThis.ctx.putImageData(canvasImageData, 0, 0);
         painterViewThis.drawing(painterViewThis.ctx);
         console.log(`mouseup p.x = ${upPoint.x} p.y = ${upPoint.y}`);
@@ -98,6 +104,27 @@ PAINTER.view.PainterView = (function () {
         ctx.beginPath();
         ctx.moveTo(this.startX, this.startY);
         ctx.lineTo(this.endX, this.endY);
+        ctx.stroke();
+      } else if (this.pieceType === PainterConstants.RECTANGLE) {
+        const w = this.endX - this.startX;
+        const h = this.endY - this.startY;
+
+        ctx.fillRect(this.startX, this.startY, w, h);
+        ctx.strokeRect(this.startX, this.startY, w, h);
+      } else if (this.pieceType === PainterConstants.ELLIPSE) {
+        const w = this.endX - this.startX;
+        const h = this.endY - this.startY;
+
+        let EllipsePiece = PAINTER.model.piece.EllipsePiece;
+        EllipsePiece.drawEllipseByBezierCurve(ctx, this.startX, this.startY, w, h);
+      } else if (this.pieceType === PainterConstants.FREE_PATH) {
+        ctx.beginPath();
+        ctx.moveTo(this.startX, this.startY);
+
+        for (const point of this.points) {
+          ctx.lineTo(point.x, point.y);
+        }
+
         ctx.stroke();
       }
     }
