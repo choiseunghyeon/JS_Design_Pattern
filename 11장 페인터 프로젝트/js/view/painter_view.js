@@ -1,8 +1,12 @@
 PAINTER.createNameSpace("PAINTER.view.PainterView");
 
 PAINTER.view.PainterView = (function () {
-  class PainterView {
+  let IPainterObserver = PAINTER.controller.observer.IPainterObserver;
+
+  class PainterView extends IPainterObserver {
     constructor() {
+      super();
+
       let PainterConstants = PAINTER.app.PainterConstants;
 
       // 캔버스 요소 가져오기
@@ -97,6 +101,10 @@ PAINTER.view.PainterView = (function () {
       // 캔버스를 이전 이미지로 복원
       this.ctx.putImageData(this.canvasImageData, 0, 0);
       this.painterModel.drawPieces(this.ctx);
+    }
+
+    update() {
+      this.repaint();
     }
   }
 

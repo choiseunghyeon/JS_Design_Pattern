@@ -69,8 +69,6 @@ PAINTER.controller.PainterController = (function () {
       if (pieceType === PainterConstants.FREE_PATH) {
         this.points = [];
       }
-
-      this.painterView.repaint();
     }
 
     controlDrag(mouseX, mouseY) {
