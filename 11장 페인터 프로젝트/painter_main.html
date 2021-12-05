@@ -5,9 +5,9 @@
     <title>Painter</title>
     <script src="./js/common/painter_common.js"></script>
     <script src="./js/app/painter_constants.js"></script>
+    <script src="./js/controller/observer/ipainter_observer.js"></script>
+    <script src="./js/controller/observer/ipainter_subject.js"></script>
     <script src="./js/app/painter_main.js"></script>
-    <script src="./js/view/painter_view.js"></script>
-    <script src="./js/view/panel/tool_button_panel.js"></script>
     <script src="./js/model/painter_model.js"></script>
     <script src="./js/model/piece/abstract_piece.js"></script>
     <script src="./js/model/piece/line_piece.js"></script>
@@ -15,9 +15,16 @@
     <script src="./js/model/piece/ellipse_piece.js"></script>
     <script src="./js/model/piece/free_path_piece.js"></script>
     <script src="./js/model/struct/point.js"></script>
+    <script src="./js/view/painter_view.js"></script>
+    <script src="./js/view/panel/tool_button_panel.js"></script>
     <script src="./js/controller/painter_controller.js"></script>
-    <script src="./js/controller/observer/ipainter_observer.js"></script>
-    <script src="./js/controller/observer/ipainter_subject.js"></script>
+
+    <script src="./js/controller/manager/abstract_piece_manager.js"></script>
+    <script src="./js/controller/manager/abstract_bounding_piece_manager.js"></script>
+    <script src="./js/controller/manager/ellipse_piece_manager.js"></script>
+    <script src="./js/controller/manager/free_path_piece_manager.js"></script>
+    <script src="./js/controller/manager/line_piece_manager.js"></script>
+    <script src="./js/controller/manager/rectangle_piece_manager.js"></script>
 
     <script>
       window.onload = function () {

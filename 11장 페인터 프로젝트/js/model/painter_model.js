@@ -6,11 +6,12 @@ PAINTER.model.PainterModel = (function () {
     constructor() {
       super();
 
-      let PainterConstants = PAINTER.app.PainterConstants;
-      this.pieces = [];
-      this.pieceType = PainterConstants.LINE;
+      let LinePieceManager = PAINTER.controller.manager.LinePieceManager;
 
+      this.pieces = [];
       this.observers = [];
+
+      this.pieceManager = new LinePieceManager();
     }
 
     drawPieces(ctx) {
@@ -23,14 +24,6 @@ PAINTER.model.PainterModel = (function () {
       this.pieces.push(piece);
 
       this.notifyObservers();
-    }
-
-    getPieceType() {
-      return this.pieceType;
-    }
-
-    setPieceType(pieceType) {
-      this.pieceType = pieceType;
     }
 
     getPieces() {
@@ -52,6 +45,14 @@ PAINTER.model.PainterModel = (function () {
       if (index >= 0) {
         this.observers.splice(index, 1);
       }
+    }
+
+    getPieceManager() {
+      return this.pieceManager;
+    }
+
+    setPieceManager(pieceManager) {
+      this.pieceManager = pieceManager;
     }
   }
   return PainterModel;

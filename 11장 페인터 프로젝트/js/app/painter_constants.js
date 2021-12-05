@@ -7,9 +7,5 @@ PAINTER.app.PainterConstants = (function () {
   PainterConstants.PAINTER_WIDTH = 600;
   PainterConstants.PAINTER_HEIGHT = 400;
 
-  PainterConstants.LINE = Symbol("line");
-  PainterConstants.RECTANGLE = Symbol("rectangle");
-  PainterConstants.ELLIPSE = Symbol("ellipse");
-  PainterConstants.FREE_PATH = Symbol("free_path");
   return PainterConstants;
 })();
