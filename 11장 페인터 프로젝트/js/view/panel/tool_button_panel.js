@@ -2,8 +2,8 @@ PAINTER.createNameSpace("PAINTER.view.panel.ToolButtonPanel");
 
 PAINTER.view.panel.ToolButtonPanel = (function () {
   class ToolButtonPanel {
-    constructor(painterView) {
-      this.painterView = painterView;
+    constructor() {
+      this.painterController = null;
     }
 
     initLayout() {
@@ -28,19 +28,19 @@ PAINTER.view.panel.ToolButtonPanel = (function () {
 
       let PainterConstants = PAINTER.app.PainterConstants;
 
-      let painterViewThis = this.painterView;
+      let painterController = this.painterController;
 
       btnLine.addEventListener("click", function (e) {
-        painterViewThis.setPieceType(PainterConstants.LINE);
+        painterController.setPieceType(PainterConstants.LINE);
       });
       btnRectangle.addEventListener("click", function (e) {
-        painterViewThis.setPieceType(PainterConstants.RECTANGLE);
+        painterController.setPieceType(PainterConstants.RECTANGLE);
       });
       btnEllipse.addEventListener("click", function (e) {
-        painterViewThis.setPieceType(PainterConstants.ELLIPSE);
+        painterController.setPieceType(PainterConstants.ELLIPSE);
       });
       btnFreePath.addEventListener("click", function (e) {
-        painterViewThis.setPieceType(PainterConstants.FREE_PATH);
+        painterController.setPieceType(PainterConstants.FREE_PATH);
       });
     }
 
@@ -51,6 +51,10 @@ PAINTER.view.panel.ToolButtonPanel = (function () {
       inputImage.setAttribute("id", id);
 
       return inputImage;
+    }
+
+    setPainterController(painterController) {
+      this.painterController = painterController;
     }
   }
 
