@@ -6,12 +6,11 @@ PAINTER.model.PainterModel = (function () {
     constructor() {
       super();
 
-      let LinePieceManager = PAINTER.controller.manager.LinePieceManager;
-
       this.pieces = [];
       this.observers = [];
 
-      this.pieceManager = new LinePieceManager();
+      let LineState = PAINTER.controller.state.LineState;
+      this.state = LineState.getInstance();
     }
 
     drawPieces(ctx) {
@@ -47,12 +46,12 @@ PAINTER.model.PainterModel = (function () {
       }
     }
 
-    getPieceManager() {
-      return this.pieceManager;
+    getState() {
+      return this.state;
     }
 
-    setPieceManager(pieceManager) {
-      this.pieceManager = pieceManager;
+    setState(state) {
+      this.state = state;
     }
   }
   return PainterModel;

@@ -1,40 +1,35 @@
 PAINTER.createNameSpace("PAINTER.controller.PainterController");
 
 PAINTER.controller.PainterController = (function () {
-  class PainterController {
+  let IContext = PAINTER.controller.state.IContext;
+
+  class PainterController extends IContext {
     constructor() {
+      super();
       this.painterModel = null;
       this.painterView = null;
     }
 
     controlPress(mouseX, mouseY) {
-      let pieceManager = this.painterModel.getPieceManager();
-      pieceManager.setStartXY(mouseX, mouseY);
+      let state = this.painterModel.getState();
+      state.press(this, mouseX, mouseY);
     }
 
     controlRelease(mouseX, mouseY) {
-      let pieceManager = this.painterModel.getPieceManager();
-      pieceManager.setEndXY(mouseX, mouseY);
-      let piece = pieceManager.createPiece();
-      pieceManager.reset();
-
-      this.painterModel.addPiece(piece);
+      let state = this.painterModel.getState();
+      state.release(this, mouseX, mouseY);
     }
 
     controlDrag(mouseX, mouseY) {
-      let pieceManager = this.painterModel.getPieceManager();
-      pieceManager.setEndXY(mouseX, mouseY);
+      let state = this.painterModel.getState();
+      state.drag(this, mouseX, mouseY);
 
       this.painterView.drawing();
     }
 
     drawing(ctx) {
-      let pieceManager = this.painterModel.getPieceManager();
-      if (pieceManager !== null) {
-        if (pieceManager.isValid()) {
-          pieceManager.drawing(ctx);
-        }
-      }
+      let state = this.painterModel.getState();
+      state.drawing(this, ctx);
     }
 
     setPainterView(painterView) {
@@ -45,8 +40,18 @@ PAINTER.controller.PainterController = (function () {
       this.painterModel = painterModel;
     }
 
-    setPieceManager(pieceManager) {
-      this.painterModel.setPieceManager(pieceManager);
+    setState(state) {
+      this.painterModel.setState(state);
+    }
+
+    changeState(state) {}
+
+    repaintView() {
+      this.painterView.repaint();
+    }
+
+    addPiece(piece) {
+      this.painterModel.addPiece(piece);
     }
   }
 
