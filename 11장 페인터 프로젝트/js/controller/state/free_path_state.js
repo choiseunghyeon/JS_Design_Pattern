@@ -1,9 +1,9 @@
 PAINTER.createNameSpace("PAINTER.controller.state.FreePathState");
 
 PAINTER.controller.state.FreePathState = (function () {
-  let IState = PAINTER.controller.state.IState;
+  let ImplState = PAINTER.controller.state.ImplState;
 
-  class FreePathState extends IState {
+  class FreePathState extends ImplState {
     constructor() {
       super();
 
@@ -11,8 +11,6 @@ PAINTER.controller.state.FreePathState = (function () {
         return FreePathState._instance;
       }
 
-      let FreePathPieceManager = PAINTER.controller.manager.FreePathPieceManager;
-      this.freePathManager = new FreePathPieceManager();
       FreePathState._instance = this;
     }
 
@@ -24,27 +22,8 @@ PAINTER.controller.state.FreePathState = (function () {
       return FreePathState._instance;
     }
 
-    press(context, mouseX, mouseY) {
-      this.freePathManager.setStartXY(mouseX, mouseY);
-    }
-
-    drag(context, mouseX, mouseY) {
-      this.freePathManager.setEndXY(mouseX, mouseY);
-
-      context.repaintView();
-    }
-    release(context, mouseX, mouseY) {
-      this.freePathManager.setEndXY(mouseX, mouseY);
-      let piece = this.freePathManager.createPiece();
-      this.freePathManager.reset();
-
-      context.addPiece(piece);
-    }
-
-    drawing(context, ctx) {
-      if (this.freePathManager.isValid()) {
-        this.freePathManager.drawing(ctx);
-      }
+    createPieceManager() {
+      return new PAINTER.controller.manager.FreePathPieceManager();
     }
   }
 

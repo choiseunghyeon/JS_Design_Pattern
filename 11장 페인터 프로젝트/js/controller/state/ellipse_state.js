@@ -1,9 +1,9 @@
 PAINTER.createNameSpace("PAINTER.controller.state.EllipseState");
 
 PAINTER.controller.state.EllipseState = (function () {
-  let IState = PAINTER.controller.state.IState;
+  let ImplState = PAINTER.controller.state.ImplState;
 
-  class EllipseState extends IState {
+  class EllipseState extends ImplState {
     constructor() {
       super();
 
@@ -11,8 +11,6 @@ PAINTER.controller.state.EllipseState = (function () {
         return EllipseState._instance;
       }
 
-      let EllipsePieceManager = PAINTER.controller.manager.EllipsePieceManager;
-      this.ellipseManager = new EllipsePieceManager();
       EllipseState._instance = this;
     }
 
@@ -24,27 +22,8 @@ PAINTER.controller.state.EllipseState = (function () {
       return EllipseState._instance;
     }
 
-    press(context, mouseX, mouseY) {
-      this.ellipseManager.setStartXY(mouseX, mouseY);
-    }
-
-    drag(context, mouseX, mouseY) {
-      this.ellipseManager.setEndXY(mouseX, mouseY);
-
-      context.repaintView();
-    }
-    release(context, mouseX, mouseY) {
-      this.ellipseManager.setEndXY(mouseX, mouseY);
-      let piece = this.ellipseManager.createPiece();
-      this.ellipseManager.reset();
-
-      context.addPiece(piece);
-    }
-
-    drawing(context, ctx) {
-      if (this.ellipseManager.isValid()) {
-        this.ellipseManager.drawing(ctx);
-      }
+    createPieceManager() {
+      return new PAINTER.controller.manager.EllipsePieceManager();
     }
   }
 

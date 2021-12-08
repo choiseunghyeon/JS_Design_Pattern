@@ -1,9 +1,9 @@
 PAINTER.createNameSpace("PAINTER.controller.state.RectangleState");
 
 PAINTER.controller.state.RectangleState = (function () {
-  let IState = PAINTER.controller.state.IState;
+  let ImplState = PAINTER.controller.state.ImplState;
 
-  class RectangleState extends IState {
+  class RectangleState extends ImplState {
     constructor() {
       super();
 
@@ -11,8 +11,6 @@ PAINTER.controller.state.RectangleState = (function () {
         return RectangleState._instance;
       }
 
-      let RectanglePieceManager = PAINTER.controller.manager.RectanglePieceManager;
-      this.rectangleManager = new RectanglePieceManager();
       RectangleState._instance = this;
     }
 
@@ -24,27 +22,8 @@ PAINTER.controller.state.RectangleState = (function () {
       return RectangleState._instance;
     }
 
-    press(context, mouseX, mouseY) {
-      this.rectangleManager.setStartXY(mouseX, mouseY);
-    }
-
-    drag(context, mouseX, mouseY) {
-      this.rectangleManager.setEndXY(mouseX, mouseY);
-
-      context.repaintView();
-    }
-    release(context, mouseX, mouseY) {
-      this.rectangleManager.setEndXY(mouseX, mouseY);
-      let piece = this.rectangleManager.createPiece();
-      this.rectangleManager.reset();
-
-      context.addPiece(piece);
-    }
-
-    drawing(context, ctx) {
-      if (this.rectangleManager.isValid()) {
-        this.rectangleManager.drawing(ctx);
-      }
+    createPieceManager() {
+      return new PAINTER.controller.manager.RectanglePieceManager();
     }
   }
   return RectangleState;
