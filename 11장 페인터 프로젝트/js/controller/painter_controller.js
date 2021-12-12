@@ -29,6 +29,10 @@ PAINTER.controller.PainterController = (function () {
 
     drawing(ctx) {
       let state = this.painterModel.getState();
+
+      ctx.lineWidth = this.getStrokeWidth();
+      ctx.strokeStyle = this.getStrokeColor();
+      ctx.fillStyle = this.getFillColor();
       state.drawing(this, ctx);
     }
 
@@ -52,6 +56,27 @@ PAINTER.controller.PainterController = (function () {
 
     addPiece(piece) {
       this.painterModel.addPiece(piece);
+    }
+
+    getStrokeWidth() {
+      return this.painterModel.getStrokeWidth();
+    }
+
+    setStrokeWidth(value) {
+      this.painterModel.setStrokeWidth(value);
+    }
+
+    getStrokeColor() {
+      return this.painterModel.getStrokeColor();
+    }
+    setStrokeColor(value) {
+      this.painterModel.setStrokeColor(value);
+    }
+    getFillColor() {
+      return this.painterModel.getFillColor();
+    }
+    setFillColor(value) {
+      this.painterModel.setFillColor(value);
     }
   }
 

@@ -11,6 +11,10 @@ PAINTER.model.PainterModel = (function () {
 
       let LineState = PAINTER.controller.state.LineState;
       this.state = LineState.getInstance();
+
+      this.strokeWidth = 10;
+      this.strokeColor = "red";
+      this.fillColor = "blue";
     }
 
     drawPieces(ctx) {
@@ -52,6 +56,26 @@ PAINTER.model.PainterModel = (function () {
 
     setState(state) {
       this.state = state;
+    }
+
+    getStrokeWidth() {
+      return this.strokeWidth;
+    }
+    setStrokeWidth(strokeWidth) {
+      this.strokeWidth = strokeWidth;
+    }
+
+    getStrokeColor() {
+      return this.strokeColor;
+    }
+    setStrokeColor(strokeColor) {
+      this.strokeColor = strokeColor;
+    }
+    getFillColor() {
+      return this.fillColor;
+    }
+    setFillColor(fillColor) {
+      this.fillColor = fillColor;
     }
   }
   return PainterModel;

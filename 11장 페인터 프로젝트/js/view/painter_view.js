@@ -23,10 +23,6 @@ PAINTER.view.PainterView = (function () {
 
       this.ctx = ctx;
 
-      ctx.lineWidth = 10;
-      ctx.strokeStyle = "red";
-      ctx.fillStyle = "blue";
-
       this.painterModel = null;
       this.painterController = null;
       this.canvasImageData = null;
@@ -44,7 +40,6 @@ PAINTER.view.PainterView = (function () {
       let pressPoint = this.relativePosition(e, canvas);
 
       painterController.controlPress(pressPoint.x, pressPoint.y);
-
       console.log(`mousedown p.x = ${pressPoint.x} p.y = ${pressPoint.y}`);
 
       let mousemoveEventListenr = function (e) {
@@ -59,7 +54,6 @@ PAINTER.view.PainterView = (function () {
         let upPoint = painterViewThis.relativePosition(e, canvas);
 
         painterController.controlRelease(upPoint.x, upPoint.y);
-
         console.log(`mouseup p.x = ${upPoint.x} p.y = ${upPoint.y}`);
         document.removeEventListener("mousemove", mousemoveEventListenr);
         document.removeEventListener("mouseup", mouseupEventListenr);

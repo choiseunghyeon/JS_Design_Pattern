@@ -28,6 +28,15 @@ PAINTER.controller.state.ImplState = (function () {
       let piece = this.pieceManager.createPiece();
       this.pieceManager.reset();
 
+      let strokeWidth = context.getStrokeWidth();
+      piece.setStrokeWidth(strokeWidth);
+
+      let strokeColor = context.getStrokeColor();
+      piece.setStrokeColor(strokeColor);
+
+      let fillColor = context.getFillColor();
+      piece.setFillColor(fillColor);
+
       context.addPiece(piece);
     }
 
