@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game</title>
+
+    <script src="./js/common/game_common.js"></script>
+    <script src="./js/app/game_constants.js"></script>
+    <script src="./js/app/game_main.js"></script>
+
+    <script src="./js/model/game_model.js"></script>
+    <script src="./js/model/sprite/abstract_sprite.js"></script>
+    <script src="./js/model/sprite/rectangle_sprite.js"></script>
+
+    <script src="./js/view/game_view.js"></script>
+    <script src="./js/view/pannel/toolbar_panel.js"></script>
+
+    <script>
+      window.onload = function () {
+        let gameMain = new GAME.app.GameMain("game");
+      };
+    </script>
+  </head>
+  <body>
+    <div id="game"></div>
+  </body>
+</html>
