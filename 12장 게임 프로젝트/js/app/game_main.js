@@ -5,6 +5,7 @@ GAME.app.GameMain = (function () {
     constructor(gameDivId) {
       const GameModel = GAME.model.GameModel;
       const GameView = GAME.view.GameView;
+      const GameController = GAME.controller.GameController;
       const ToolbarPanel = GAME.view.panel.ToolbarPanel;
 
       let game = document.getElementById(gameDivId);
@@ -16,17 +17,20 @@ GAME.app.GameMain = (function () {
       game.appendChild(gameCanvas);
 
       let gameModel = new GameModel();
+      let gameController = new GameController(gameModel);
       let gameView = new GameView(gameCanvas, gameModel);
 
-      let toolbarPanel = new GAME.view.panel.ToolbarPanel();
+      gameController.setGameView(gameView);
+
+      let toolbarPanel = new ToolbarPanel(gameController);
       toolbarPanel.initLayout(toolbar);
 
-      this.setup(gameModel);
+      this.setup(gameController);
 
       gameView.repaint();
     }
 
-    setup(gameModel) {
+    setup(gameController) {
       let shapeSprite = new GAME.model.sprite.RectangleSprite();
       shapeSprite.setX(50);
       shapeSprite.setY(50);
@@ -35,7 +39,17 @@ GAME.app.GameMain = (function () {
 
       shapeSprite.setFillColor("red");
 
-      gameModel.addSprite(shapeSprite);
+      gameController.addSprite(shapeSprite);
+
+      shapeSprite = new GAME.model.sprite.EllipseSprite();
+
+      shapeSprite.setX(300);
+      shapeSprite.setY(50);
+      shapeSprite.setWidth(200);
+      shapeSprite.setHeight(150);
+
+      shapeSprite.setFillColor("blue");
+      gameController.addSprite(shapeSprite);
     }
   }
   return GameMain;

@@ -7,5 +7,7 @@ GAME.app.GameConstants = (function () {
   GameConstants.GAME_WIDTH = 600;
   GameConstants.GAME_HEIGHT = 500;
 
+  GameConstants.INTERVAL_TIME = 100;
+
   return GameConstants;
 })();
