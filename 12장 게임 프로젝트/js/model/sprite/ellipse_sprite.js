@@ -13,12 +13,15 @@ GAME.model.sprite.EllipseSprite = (function () {
       this.height = 0;
     }
 
-    draw(ctx) {
+    drawSprite(ctx) {
       ctx.fillStyle = this.fillColor;
 
       ctx.strokeStyle = "black";
 
-      this.drawEllipseByBezierCurve(ctx, this.x, this.y, this.width, this.height);
+      let x = -1 * this.width * this.anchorX;
+      let y = -1 * this.height * this.anchorY;
+
+      this.drawEllipseByBezierCurve(ctx, x, y, this.width, this.height);
     }
 
     drawEllipseByBezierCurve(ctx, x, y, w, h) {

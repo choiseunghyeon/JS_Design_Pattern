@@ -24,7 +24,11 @@ GAME.controller.GameController = (function () {
       this.timer = window.setInterval(function () {
         console.log("time : " + new Date());
 
+        self.model.updateSprites();
+
         self.view.repaint();
+
+        self.model.increaseFrameIndex();
       }, GameConstants.INTERVAL_TIME);
     }
 

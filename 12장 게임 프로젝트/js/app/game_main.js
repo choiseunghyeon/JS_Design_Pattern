@@ -31,7 +31,13 @@ GAME.app.GameMain = (function () {
     }
 
     setup(gameController) {
+      this.loadResource();
+
       let shapeSprite = new GAME.model.sprite.RectangleSprite();
+
+      shapeSprite.setAnchorX(0);
+      shapeSprite.setAnchorY(0);
+
       shapeSprite.setX(50);
       shapeSprite.setY(50);
       shapeSprite.setWidth(200);
@@ -43,6 +49,9 @@ GAME.app.GameMain = (function () {
 
       shapeSprite = new GAME.model.sprite.EllipseSprite();
 
+      shapeSprite.setAnchorX(0);
+      shapeSprite.setAnchorY(0);
+
       shapeSprite.setX(300);
       shapeSprite.setY(50);
       shapeSprite.setWidth(200);
@@ -50,6 +59,41 @@ GAME.app.GameMain = (function () {
 
       shapeSprite.setFillColor("blue");
       gameController.addSprite(shapeSprite);
+
+      let GameConstants = GAME.app.GameConstants;
+
+      shapeSprite = new GAME.model.sprite.ImageSprite(GameConstants.PLAYER_SPRITE_IMAGE_NAME, GameConstants.PLAYER_SPRITE_IMAGE_COUNT);
+
+      shapeSprite.setAnchorX(0);
+      shapeSprite.setAnchorY(0);
+
+      shapeSprite.setX(50);
+      shapeSprite.setY(250);
+      gameController.addSprite(shapeSprite);
+    }
+
+    loadResource() {
+      let GameConstants = GAME.app.GameConstants;
+      let ImageRepository = GAME.controller.repository.ImageRepository;
+
+      let imageRepository = ImageRepository.getInstance();
+      let imageInfo = {
+        name: GameConstants.PLAYER_SPRITE_IMAGE_NAME,
+        count: GameConstants.PLAYER_SPRITE_IMAGE_COUNT,
+      };
+
+      imageRepository.queryImageInfo(imageInfo);
+
+      let loadingPercentComplete = 0;
+
+      let imageLoaderTimer = window.setInterval(function loadImages() {
+        loadingPercentComplete = imageRepository.loadImages();
+
+        if (loadingPercentComplete === 100) {
+          window.clearInterval(imageLoaderTimer);
+          console.log("finished loading images");
+        }
+      }, GameConstants.INTERVAL_TIME);
     }
   }
   return GameMain;

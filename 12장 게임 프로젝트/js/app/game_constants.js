@@ -9,5 +9,10 @@ GAME.app.GameConstants = (function () {
 
   GameConstants.INTERVAL_TIME = 100;
 
+  GameConstants.IMAGE_RESOURCE_DIR = "images";
+
+  GameConstants.PLAYER_SPRITE_IMAGE_COUNT = 6;
+  GameConstants.PLAYER_SPRITE_IMAGE_NAME = "player";
+
   return GameConstants;
 })();

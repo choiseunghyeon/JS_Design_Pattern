@@ -23,6 +23,7 @@ GAME.view.GameView = (function () {
     }
 
     repaint() {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       let sprites = this.gameModel.getSprites();
 
       for (const sprite of sprites) {

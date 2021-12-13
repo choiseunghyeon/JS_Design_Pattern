@@ -13,14 +13,15 @@ GAME.model.sprite.RectangleSprite = (function () {
       this.height = 0;
     }
 
-    draw(ctx) {
-      ctx.fillStyle = this.fillColor;
+    drawSprite(ctx) {
+      let x = -1 * this.width * this.anchorX;
+      let y = -1 * this.height * this.anchorY;
 
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.fillStyle = this.fillColor;
+      ctx.fillRect(x, y, this.width, this.height);
 
       ctx.strokeStyle = "black";
-
-      ctx.strokeRect(this.x, this.y, this.widht, this.height);
+      ctx.strokeRect(x, y, this.widht, this.height);
     }
   }
 
