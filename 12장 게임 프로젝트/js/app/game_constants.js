@@ -14,5 +14,8 @@ GAME.app.GameConstants = (function () {
   GameConstants.PLAYER_SPRITE_IMAGE_COUNT = 6;
   GameConstants.PLAYER_SPRITE_IMAGE_NAME = "player";
 
+  GameConstants.DEFAULT_FONT_SIZE = 13;
+  GameConstants.DEFAULT_FONT = GameConstants.DEFAULT_FONT_SIZE + "px Arial";
+
   return GameConstants;
 })();
