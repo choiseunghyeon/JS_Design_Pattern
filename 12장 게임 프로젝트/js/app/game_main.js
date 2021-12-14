@@ -33,7 +33,8 @@ GAME.app.GameMain = (function () {
     setup(gameController) {
       this.loadResource();
 
-      let shapeSprite = new GAME.model.sprite.RectangleSprite();
+      let SpriteFactory = GAME.controller.factory.SpriteFactory;
+      let shapeSprite = SpriteFactory.createRectangleSprite();
 
       shapeSprite.setAnchorX(0);
       shapeSprite.setAnchorY(0);
@@ -47,7 +48,7 @@ GAME.app.GameMain = (function () {
 
       gameController.addSprite(shapeSprite);
 
-      shapeSprite = new GAME.model.sprite.EllipseSprite();
+      shapeSprite = SpriteFactory.createEllipseSprite();
 
       shapeSprite.setAnchorX(0);
       shapeSprite.setAnchorY(0);
@@ -62,7 +63,7 @@ GAME.app.GameMain = (function () {
 
       let GameConstants = GAME.app.GameConstants;
 
-      shapeSprite = new GAME.model.sprite.LabelSprite(GameConstants.PLAYER_SPRITE_IMAGE_NAME, GameConstants.PLAYER_SPRITE_IMAGE_COUNT);
+      shapeSprite = SpriteFactory.createImageSprite(GameConstants.PLAYER_SPRITE_IMAGE_NAME, GameConstants.PLAYER_SPRITE_IMAGE_COUNT);
 
       shapeSprite.setAnchorX(0);
       shapeSprite.setAnchorY(0);
@@ -71,10 +72,8 @@ GAME.app.GameMain = (function () {
       shapeSprite.setY(250);
       gameController.addSprite(shapeSprite);
 
-      let LabelSprite = GAME.model.sprite.LabelSprite;
-
       let label = "scroeLabel";
-      let labelSprite = new LabelSprite(label);
+      let labelSprite = SpriteFactory.createLabelSprite(label, 100, 50);
 
       labelSprite.setAnchorX(0);
       labelSprite.setAnchorY(0);
