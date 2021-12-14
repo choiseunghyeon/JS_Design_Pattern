@@ -9,7 +9,7 @@ GAME.model.sprite.RectangleSprite = (function () {
 
       this.x = 0;
       this.y = 0;
-      this.widht = 0;
+      this.width = 0;
       this.height = 0;
     }
 
@@ -21,7 +21,7 @@ GAME.model.sprite.RectangleSprite = (function () {
       ctx.fillRect(x, y, this.width, this.height);
 
       ctx.strokeStyle = "black";
-      ctx.strokeRect(x, y, this.widht, this.height);
+      ctx.strokeRect(x, y, this.width, this.height);
     }
   }
 

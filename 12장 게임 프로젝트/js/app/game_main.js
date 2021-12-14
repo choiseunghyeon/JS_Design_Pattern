@@ -85,6 +85,36 @@ GAME.app.GameMain = (function () {
       labelSprite.setHeight(50);
 
       gameController.addSprite(labelSprite);
+
+      let RectangleSprite = GAME.model.sprite.RectangleSprite;
+      let AirplaneCompositeSprite = GAME.model.sprite.AirplaneCompositeSprite;
+
+      let bodySprite = new RectangleSprite();
+      bodySprite.setAnchorX(0.5);
+      bodySprite.setAnchorY(0.5);
+
+      bodySprite.setWidth(15);
+      bodySprite.setHeight(50);
+
+      let leftWingSprite = new RectangleSprite();
+      leftWingSprite.setWidth(30);
+      leftWingSprite.setHeight(20);
+      leftWingSprite.setFillColor("red");
+
+      let rightWingSprite = new RectangleSprite();
+      rightWingSprite.setWidth(30);
+      rightWingSprite.setHeight(20);
+      rightWingSprite.setFillColor("red");
+
+      let airplaneCompositeSprite = new AirplaneCompositeSprite();
+      airplaneCompositeSprite.addSprite(bodySprite);
+      airplaneCompositeSprite.addSprite(leftWingSprite);
+      airplaneCompositeSprite.addSprite(rightWingSprite);
+
+      airplaneCompositeSprite.setX(350);
+      airplaneCompositeSprite.setY(250);
+
+      gameController.addSprite(airplaneCompositeSprite);
     }
 
     loadResource() {
