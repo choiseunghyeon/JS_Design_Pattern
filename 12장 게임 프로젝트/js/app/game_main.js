@@ -86,35 +86,23 @@ GAME.app.GameMain = (function () {
 
       gameController.addSprite(labelSprite);
 
-      let RectangleSprite = GAME.model.sprite.RectangleSprite;
-      let AirplaneCompositeSprite = GAME.model.sprite.AirplaneCompositeSprite;
+      let RectangleEnemyFactory = GAME.controller.factory.RectangleEnemyFactory;
+      let EllipseEnemyFactory = GAME.controller.factory.EllipseEnemyFactory;
 
-      let bodySprite = new RectangleSprite();
-      bodySprite.setAnchorX(0.5);
-      bodySprite.setAnchorY(0.5);
+      let enemyFactory = new RectangleEnemyFactory();
+      let enemySprite = enemyFactory.createEnemy();
 
-      bodySprite.setWidth(15);
-      bodySprite.setHeight(50);
+      enemySprite.setX(350);
+      enemySprite.setY(250);
 
-      let leftWingSprite = new RectangleSprite();
-      leftWingSprite.setWidth(30);
-      leftWingSprite.setHeight(20);
-      leftWingSprite.setFillColor("red");
+      gameController.addSprite(enemySprite);
 
-      let rightWingSprite = new RectangleSprite();
-      rightWingSprite.setWidth(30);
-      rightWingSprite.setHeight(20);
-      rightWingSprite.setFillColor("red");
+      enemyFactory = new EllipseEnemyFactory();
+      enemySprite = enemyFactory.createEnemy();
 
-      let airplaneCompositeSprite = new AirplaneCompositeSprite();
-      airplaneCompositeSprite.addSprite(bodySprite);
-      airplaneCompositeSprite.addSprite(leftWingSprite);
-      airplaneCompositeSprite.addSprite(rightWingSprite);
-
-      airplaneCompositeSprite.setX(350);
-      airplaneCompositeSprite.setY(250);
-
-      gameController.addSprite(airplaneCompositeSprite);
+      enemySprite.setX(450);
+      enemySprite.setY(250);
+      gameController.addSprite(enemySprite);
     }
 
     loadResource() {
