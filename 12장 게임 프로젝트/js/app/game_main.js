@@ -86,6 +86,11 @@ GAME.app.GameMain = (function () {
 
       gameController.addSprite(labelSprite);
 
+      let time = 10;
+
+      let currentFrameIndex = gameController.getCurrentFrameIndex();
+      let frameDuration = gameController.getFrameDuration();
+
       let RectangleEnemyFactory = GAME.controller.factory.RectangleEnemyFactory;
       let EllipseEnemyFactory = GAME.controller.factory.EllipseEnemyFactory;
 
@@ -95,6 +100,10 @@ GAME.app.GameMain = (function () {
       enemySprite.setX(350);
       enemySprite.setY(250);
 
+      let fadeOutAction = new GAME.model.action.FadeOutAction(time);
+      fadeOutAction.setStartFrameIndex(currentFrameIndex, frameDuration);
+      enemySprite.setAction(fadeOutAction);
+
       gameController.addSprite(enemySprite);
 
       enemyFactory = new EllipseEnemyFactory();
@@ -102,6 +111,13 @@ GAME.app.GameMain = (function () {
 
       enemySprite.setX(450);
       enemySprite.setY(250);
+
+      let byPositionX = 0;
+      let byPositionY = 500;
+      let moveByAction = new GAME.model.action.MoveByAction(time, byPositionX, byPositionY);
+
+      moveByAction.setStartFrameIndex(currentFrameIndex, frameDuration);
+      enemySprite.setAction(moveByAction);
       gameController.addSprite(enemySprite);
     }
 

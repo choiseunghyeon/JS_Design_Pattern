@@ -26,6 +26,8 @@ GAME.controller.GameController = (function () {
 
         self.model.updateSprites();
 
+        self.model.runSprites();
+
         self.view.repaint();
 
         self.model.increaseFrameIndex();
@@ -38,6 +40,14 @@ GAME.controller.GameController = (function () {
       if (this.timer !== null) {
         window.clearInterval(this.timer);
       }
+    }
+
+    getCurrentFrameIndex() {
+      return this.model.getFrameIndex();
+    }
+
+    getFrameDuration() {
+      return this.model.getFrameDuration();
     }
   }
 

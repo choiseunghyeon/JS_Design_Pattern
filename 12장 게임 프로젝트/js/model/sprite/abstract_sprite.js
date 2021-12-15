@@ -15,6 +15,8 @@ GAME.model.sprite.AbstractSprite = (function () {
 
       this.anchorX = 0.5;
       this.anchorY = 0.5;
+
+      this.action = null;
     }
 
     draw(ctx) {
@@ -83,6 +85,29 @@ GAME.model.sprite.AbstractSprite = (function () {
 
     setAnchorY(anchorY) {
       this.anchorY = anchorY;
+    }
+
+    run(currentFrameIndex, frameDuration) {
+      if (this.action !== null) {
+        if (this.action.isUnderStartFrame(currentFrameIndex)) {
+          return;
+        }
+
+        let totalFrameCount = this.action.getTotalFrameCount(frameDuration);
+
+        if (this.action.isOverEndFrame(currentFrameIndex, totalFrameCount)) {
+          return;
+        }
+
+        let timeIndex = this.action.getFrameIndex(currentFrameIndex);
+        let time = parseFloat(timeIndex) / parseFloat(totalFrameCount);
+
+        this.action.run(this, currentFrameIndex, frameDuration, time);
+      }
+    }
+
+    setAction(action) {
+      this.action = action;
     }
   }
   return AbstractSprite;

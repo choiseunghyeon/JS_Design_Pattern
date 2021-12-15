@@ -47,6 +47,14 @@ GAME.model.GameModel = (function () {
 
       sprites.forEach(sprite => sprite.update(this.frameIndex));
     }
+
+    runSprites() {
+      let sprites = this.getSprites();
+
+      let frameDuration = this.getFrameDuration();
+
+      sprites.forEach(sprite => sprite.run(this.frameIndex, frameDuration));
+    }
   }
 
   return GameModel;
