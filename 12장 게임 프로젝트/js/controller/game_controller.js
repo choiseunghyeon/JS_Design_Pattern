@@ -1,7 +1,8 @@
 GAME.createNameSpace("GAME.controller.GameController");
 
 GAME.controller.GameController = (function () {
-  class GameController {
+  let IGameContext = GAME.controller.scene.IGameContext;
+  class GameController extends IGameContext {
     constructor(model) {
       this.model = model;
       this.view = null;
@@ -12,19 +13,18 @@ GAME.controller.GameController = (function () {
       this.view = gameView;
     }
 
-    addSprite(sprite) {
-      this.model.addSprite(sprite);
-    }
-
     start() {
       let GameConstants = GAME.app.GameConstants;
+      let MenuGameScene = GAME.controller.scene.MenuGameScene;
+
+      this.changeScene(MenuGameScene.getInstance());
 
       let self = this;
 
       this.timer = window.setInterval(function () {
         console.log("time : " + new Date());
 
-        self.model.updateSprites();
+        self.model.updateScene(self);
 
         self.model.runSprites();
 
@@ -48,6 +48,22 @@ GAME.controller.GameController = (function () {
 
     getFrameDuration() {
       return this.model.getFrameDuration();
+    }
+
+    changeScene(scene) {
+      this.model.changeScene(scene, this);
+    }
+
+    getScreenHeight() {
+      return this.view.getHeight();
+    }
+
+    getScreenWidth() {
+      return this.view.getWidth();
+    }
+
+    repaintView() {
+      this.view.repaint();
     }
   }
 

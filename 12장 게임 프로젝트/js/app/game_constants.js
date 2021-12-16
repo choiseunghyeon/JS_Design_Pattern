@@ -17,5 +17,11 @@ GAME.app.GameConstants = (function () {
   GameConstants.DEFAULT_FONT_SIZE = 13;
   GameConstants.DEFAULT_FONT = GameConstants.DEFAULT_FONT_SIZE + "px Arial";
 
+  GameConstants.CREATE_ENEMY_PERIOD = 10;
+
+  GameConstants.MAX_LIFE = 10;
+  GameConstants.MAX_STAGE = 2;
+  GameConstants.MAX_SCORE = 5;
+
   return GameConstants;
 })();

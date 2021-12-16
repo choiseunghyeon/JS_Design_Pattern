@@ -109,6 +109,24 @@ GAME.model.sprite.AbstractSprite = (function () {
     setAction(action) {
       this.action = action;
     }
+
+    contains(x, y) {
+      let bound = this.getBounds();
+
+      return bound.contains(x, y);
+    }
+
+    getBounds() {
+      let width = this.getWidth();
+      let height = this.getHeight();
+
+      let ix = parseInt(this.x - width * this.anchorX, 10);
+      let iy = parseInt(this.x - width * this.anchorX, 10);
+      let iw = parseInt(width, 10);
+      let ih = parseInt(height, 10);
+
+      return new Game.model.struct.Rectangle(ix, iy, iw, ih);
+    }
   }
   return AbstractSprite;
 })();

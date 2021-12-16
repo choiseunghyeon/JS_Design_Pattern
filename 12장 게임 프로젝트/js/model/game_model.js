@@ -3,19 +3,11 @@ GAME.createNameSpace("GAME.model.GameModel");
 GAME.model.GameModel = (function () {
   class GameModel {
     constructor() {
-      this.sprites = [];
-
       this.frameIndex = 0;
 
       this.framePerSecond = 10;
-    }
 
-    getSprites() {
-      return this.sprites;
-    }
-
-    addSprite(sprite) {
-      this.sprites.push(sprite);
+      this.scene = null;
     }
 
     getFrameDuration() {
@@ -42,10 +34,34 @@ GAME.model.GameModel = (function () {
       this.framePerSecond = framePerSecond;
     }
 
-    updateSprites() {
-      let sprites = this.getSprites();
+    updateScene(context) {
+      this.updateScene.update(context, this.frameIndex);
+    }
 
-      sprites.forEach(sprite => sprite.update(this.frameIndex));
+    changeScene(scene, context) {
+      if (this.scene !== null) {
+        this.scene.finish();
+      }
+
+      if (scene !== null) {
+        scene.setup(context);
+      }
+
+      this.scene = scene;
+    }
+
+    getScene() {
+      return this.scene;
+    }
+
+    getSprites() {
+      if (this.scene === null) {
+        return null;
+      }
+
+      let sprites = this.scene.getSprites();
+
+      return sprites;
     }
 
     runSprites() {
